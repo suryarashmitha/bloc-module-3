@@ -1,0 +1,81 @@
+#### Questions
+
+> Why do programmers use pseudocode?
+
+A: Pseudocode consists of a series of English-like statements that describe a task or algorithm. So it makes easy to read and understand your intentions.
+
+> If you run pseudocode on your computer what would happen?
+
+A: Pseudocode is meant for humans to read rather than machines, so it will not run on a computer.
+
+####Programming Assignment
+
+####Write the following algorithms in pseudocode:
+
+> Create a function that takes two numbers and prints out the greater number.
+
+A: Pseudocode:
+INPUT first number
+INPUT second number
+IF first number is greater than second number
+  PRINT "first number is greater"
+ELSE IF first number is less than second number
+  PRINT "second number is greater"
+ELSE 
+  PRINT "first and second numbers are same"
+END IF
+
+> Create a function that prints out the numbers from 1 to 100.
+
+A: Pseudocode:
+FUNCTION printsNumbers
+BEGIN 
+  num=100 // num needs to start at 100
+WHILE (num >= 0) //looping goes till num is greater than to equal to 0
+  PRINT num
+  num = num-1 // decrement 100 by 1
+END WHILE
+PRINT num
+END
+
+> Create a function that searches for a specific entry in a phonebook.
+
+A: Pseudocode:
+INPUT array of contacts
+FUNCTION contactSearch with PARAMETER contact
+  FOR index = 0
+  Index leads than contacts length
+    IF index of contacts === contact
+	PRINT "found contact "+ contact + " at index " + i
+	RETURN true
+    END IF
+  END FOR
+ RETURN false
+END FUNCTION
+IF no contact
+  PRINT "contact does not exist"
+
+
+> Using the pseudocode you wrote for the previous question, implement it in any computer language of your choice.
+
+A: Code:
+
+var contacts = ["surya", "rashmitha", "dinesh", "sam", "pam"];
+
+function contactSearch(contact) {
+    for(var i=0; i < contacts.length; i++) {
+        if(contacts[i] === contact) {
+            console.log("Found contact " + contact + " at index " + i);
+            return true;
+        }
+    } 
+    return false;
+}
+
+var contact = contactSearch("surya");
+if(!contact) {
+    console.log('contact does not exist!');
+}
+
+
+
