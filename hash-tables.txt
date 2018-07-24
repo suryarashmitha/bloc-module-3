@@ -1,0 +1,92 @@
+####Questions
+
+> What is a hash table?
+
+A: Hash tables, like arrays, are intended to be used as collections of similar data. They are commonly used to store data by some form of identifier. 
+
+>  What is hashing?
+
+A: Hash tables use hashing to convert string keys to numeric indices. Hashing is the conversion from a string to a numerical index. A hashing function is used to convert the key to a specific, fixed-length number, referred to as a hash code.
+
+> How does a hash table store data?
+
+A: A hash table is a data structure that is used to store keys/value pairs.
+
+> How are hash tables and objects different?
+
+A: If data we have is a static number of distinct values of different types, then use object to access it. Use a hash table when your data contains a variable number of consistently formatted values, each with an identifier.
+
+> Determine whether you would use a hash table or an object to store each of the following pieces of data:
+
+A:
+    * A list of pets and their unique names: `Object`
+    * The name, age, and the birthday of your best friend: `Object`
+    * The name and location of every company in a given city: `Hash Table`
+    * All of the books checked out from a library by a particular individual: `Hash Table`
+    * The primary and secondary phone numbers for a contact: `Object`
+
+>  Build a system that allows a sales associate to enter a customer's name, address, and phone number into the system and look up customers using their phone numbers. Store this information in a hash table.
+
+A: Code:
+class Customer {
+   constructor(name, address, phoneNumber) {
+      this.name = name;
+      this.address = address;
+      this.phoneNumber = phoneNumber;
+   }
+
+	getHash() {
+		return parseInt(this.phoneNumber);
+	}
+}
+
+let customerList = [];
+
+let surya = new Customer('Surya', 'MacArthur Blvd', '8482483111');
+
+let dinesh = new Customer('Dinesh', 'N Glen Dr', '8482483222');
+
+customerList[surya.getHash()] = surya;
+customerList[dinesh.getHash()] = dinesh;
+
+>  Build a system that allows a store owner to track their store's inventory using a hash table for storage.
+
+A: class Inventory {
+  constructor(item, count, serial) {
+    this.item = item;
+    this.count = count;
+    this.serial = serial;
+  }
+
+  getHash() {
+    return parseInt(this.serial);
+  }
+}
+
+let inventoryList = [];
+
+let yamahaRx = new Inventory('Yamaha RX-100', '4', '38011345680');
+
+inventoryList[yamahaRx.getHash()] = yamahaRx;
+
+
+>  Build a system that allows digital copies of newspapers to be entered and searched by publisher and publication date. Use hash tables to store the necessary data.
+
+A: class Articles { 
+	constructor(copy, publisher, pubDate) {
+		this.copy = copy;
+		this.publisher = publisher;
+		this.pubDate = pubDate;
+	}
+
+	getHash() {
+		return this.pubDate + ' ' + this.publisher;
+	}
+}
+
+let compiledArticles = [];
+
+let newArticle = new Articles('Global Warming and Coral Reefs', 'National Geographic', '07-24-2018');
+
+compiledArticles[newArticle.getHash()] = newArticle;
+
