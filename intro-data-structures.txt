@@ -1,0 +1,65 @@
+#### Questions
+
+> A line of people at an amusement park ride.
+
+The line is composed of members, represented as strings.
+There is a front to the line, as well as a back.
+When someone enters the line, place them at the end.
+People may leave the line whenever they see fit, and those behind them take their place.
+Given the above real-world information, use an array data structure to code the following solution.
+
+a) Use an array input: ["Vivian", "Ava", "Josh", "Patrick", "Mike"]
+b) Insert a new person, "Mary" at the end of the line. In other words, you should insert Mary after Mike.
+c) Find a person in line named "Josh." This function should return the position of 2 in the array, (recall that arrays are 0-based).
+d) Find a person in line named "Emily." What should your function return if it does not find the item in the array?
+e) What if Ava wants to allow a friend, "Melissa", to cut in line in front of her? How would you code this so Melissa appears before Ava?
+f) If Patrick wants to leave the line, how would you delete him from the array?
+
+A: Code:
+class Line {
+  
+  constructor(persons) {
+      this.persons = persons;
+   }
+  
+  addNewPersonToLine(person) {
+    this.persons.push(person);
+  }
+  
+  findPersonPosition(person) {
+   return this.persons.indexOf(person);
+  }
+  
+  addNewPersonInLine(person, position) {
+    this.persons.splice(position, 0, person);
+  }
+  
+  leave(person) {
+   let indexOfPerson = this.findPersonPosition(person); 
+   this.persons.splice(indexOfPerson, 1);
+  }
+}
+
+
+let line1 = new Line(["Vivian", "Ava", "Josh", "Patrick", "Mike"]);
+console.log(line1.persons);
+line1.addNewPersonToLine("Dinesh");
+console.log(line1.persons);
+console.log("Found at Position: "+line1.findPersonPosition("Patrick"));
+console.log("Not found, so position is: "+line1.findPersonPosition("Dineddsh"));
+let positionToAdd = line1.findPersonPosition("Ava");
+line1.addNewPersonInLine("Melissa", positionToAdd);
+console.log(line1.persons);
+line1.leave("Patrick");
+console.log(line1.persons);
+
+
+> Provide another real-world example that you can model using a data structure.
+ 
+A:You can relate anything in daily life to data structures. Imagine you are arranging all  dairy milk chocolates in a box and naming it. This is like an array, where you store similar elements of same data type under a single name. When you arrange your books in a pile, it represents a stack which is a data structure. When you stand in a line , it represents a queue. If you want to represent your family hierarchy on a paper, you use trees and graphs. You can always relate a train to a linked list.
+
+
+> How would your data structure allow developers to access and manipulate the data?
+
+A: There is a couple of instance methods written to manipulate data. Once a new line is created, we can use methods on the instance to add/remove/update line with them. 
+
