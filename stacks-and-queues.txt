@@ -1,0 +1,120 @@
+####Exercises
+
+> What is the main difference between a stack and a queue?
+
+A:In a stack, an object is pushed on top of the collection during insertion operation. In a queue, new object is inserted at the end. An object is removed from a stack from the top. In queue, object is removed from the beginning. In stacks, the two operations allowed are called push (insertion) and pop (removal). In queue, two possible operations are called enqueue (insertion) and dequeue (removal). In a stack we remove the item the most recently added; in a queue, we remove the item the least recently added.Stacks are visualized as vertical collections. Queues are visualized as horizontal collections.
+
+> What are the similarities between stacks and queues?
+
+A: Both stacks and queues are data structures used for organizing a set of data. The structure is defined by how the data is stored and how operations, such as data access, insertion and deletion, are performed on the stored data. These are essential tools for programmers, as each structure has a set of benefits that make it useful for solving certain types of problem.
+
+> Imagine you are an engineer tasked with implementing the UNDO and REDO options in a word processor such as Microsoft Word. Which data structure would you use for each option and why?
+
+A: For storing undo and redo state is a stack. Separate stacks for undo and redo information, and simply transfer items between them, like:
+every new action you do is pushed on the undo stack,
+every undo pops an item off the undo stack and pushes it onto the redo stack,
+every redo pops an item off the redo stack and pushes it onto the undo stack.
+
+####Programming Questions
+
+> You may program the following question in any language of your choice. Before you begin coding, write out a plan as to how you will solve the question.
+
+ Given a string, reverse it using a stack. For example, the string "Bloc!" should be converted to "!colB".
+
+A: Pseudo Code:
+FUNCTION REVERSESTACK(string)
+  INIT a new stack
+  FOR each character in string
+    CALL stack.push WITH character
+  END FOR
+  INIT reversed to empty string
+  WHILE stack is not empty
+    CALL stack.pop RETURNING character
+    APPEND character to reversed
+  END WHILE
+  RETURN reversed
+END FUNCTION
+
+Code:
+
+function reverseStack(string) {
+	let stack = [];
+	
+	for(let i = 0; i < string.length; i++) {
+		stack.push(string[i]);
+	}
+
+	let reversed = '';
+	
+	while(stack.length > 0) {
+		let removed = stack.pop();
+		reversed += removed;
+	}
+  	return reversed;
+}
+console.log(reverseStack("Bloc!"));
+
+> Implement the delete functionality of a stack using one queue. Make a FIFO data structure mirror the functionality of a LIFO data structure.
+
+To delete an item, take all of the elements in the queue one at a time and put them at the end of the queue, except for the last one which should be deleted and returned.
+
+CLASS Stack
+ FUNCTION pop(queue)
+   ...fill in pseudocode here
+ END FUNCTION
+END CLASS
+
+A:
+const deleteStack = (queue) => {
+	let first, last;
+
+	for (let i = 0; i < queue.length; i++) {
+		if (i !== queue.length - 1) {
+			first = queue.shift(); 
+			queue.push(first);
+			console.log(queue);
+		} else {
+			last = queue.shift();
+			console.log(queue)
+		}
+	}
+	return last;
+
+}
+console.log(deleteStack(['A','B','C','D']));
+
+> Fill in the methods for the following Queue class so that it will work as expected (FIFO).
+
+CLASS QUEUE
+ FUNCTION enqueue(element)
+   ...fill in pseudocode here
+ END FUNCTION
+
+ FUNCTION dequeue
+   ...fill in pseudocode here
+ END FUNCTION
+END CLASS
+
+A: 
+class Queue {
+	constructor(items) {
+		this.items = items;
+	}
+	enqueue(items) {
+		this.items.push(items)
+		return this.items;
+	}
+
+	dequeue() {
+		this.items.splice(0,1);
+		return this.items;
+	}
+
+}
+
+let serviceLine = new Queue(['Jonathan', 'Christina', 'Jeff']);
+
+console.log(serviceLine.enqueue('Carol'));
+console.log(serviceLine.dequeue());
+
+
