@@ -35,21 +35,20 @@ class CustomerHashTable {
   
   
   getByPhoneNumber(phonenumber) {
-    return this.list.filter(li => li[2] === phonenumber);
+    return this.list[phonenumber];
   }
 
   set(name, address, phonenumber) {
-    this.list.push([name, address, phonenumber])
+    this.list[phonenumber] =[name, address, phonenumber];
   }
 }
 
-console.log("Enterting customer details into the system....");
+console.log("Entering customer details into the system....");
 var table = new CustomerHashTable();
 for(var i=1; i<10; i++){
   table.set("name "+i, "Address "+i, "phonenumber "+i);
 }
-console.log(table);
-console.log(table.getByPhoneNumber("phonenumber 1"));
+console.log(table.getByPhoneNumber("phonenumber 2"));
 
 >  Build a system that allows a store owner to track their store's inventory using a hash table for storage.
 
@@ -60,7 +59,7 @@ class InventoryHashTable {
   }   
   
   set(item, count, serial) {
-    this.list.push([item, count, serial])
+    this.list[serial]=[item, count, serial];
   }
 }
 
@@ -69,7 +68,12 @@ var table = new InventoryHashTable();
 for(var i=1; i<10; i++){
   table.set("item "+i, "count "+i, "serial"+i);
 }
-console.log(table);
+
+for(var index in table.list) {
+  console.log("no. "+ index +" - Name: "+ table.list[index][0]+ " Count: "+ table.list[index][1]);
+}
+
+
 >  Build a system that allows digital copies of newspapers to be entered and searched by publisher and publication date. Use hash tables to store the necessary data.
 
 A: 
@@ -77,29 +81,21 @@ class NewspaperHashTable {
   constructor() {
     this.list = [];
   }   
-  
-  
-  getByPublisher(name) {
-    let result = this.list.filter(li => li[1] === name);
-    return result;
-  }
-  
-  getByDate(date) {
-    let result = this.list.filter(li => li[2] === date);
-    return result;
+ 
+  get(publisher, date) {
+    return this.list[publisher+date];
   }
 
   set(name, publisher, date) {
-    this.list.push([name, publisher, date])
+    this.list[publisher+date]=[name, publisher, date];
   }
 }
 
-console.log("Enterting news papers into the system....");
+console.log("Entering news papers into the system....");
 var table = new NewspaperHashTable();
 for(var i=1; i<10; i++){
   table.set("name "+i, "publisher "+i, "2018-07-2"+i);
 }
-console.log(table);
-console.log(table.getByPublisher("publisher 1"));
-console.log(table.getByDate("2018-07-25"));
+
+console.log(table.get("publisher 1", "2018-07-21"));
 
