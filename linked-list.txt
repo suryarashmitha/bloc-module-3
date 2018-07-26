@@ -1,0 +1,185 @@
+####Exercises
+
+> What are some pros and cons of using linked lists instead of arrays?
+
+A: When a program declares an array, the array occupies n consecutive memory blocks where n is the number of elements in the array. Each block consumes some number of memory locations.The size of the arrays is fixed: So we must know the upper limit on the number of elements in advance. Exceptionally large arrays require the operating system to rearrange the physical memory space to make room for them; this is an expensive operation.
+If a program asks for more memory than the operating system allows, the OS will raise an out-of-memory exception and kill the process.
+
+This makes inserting a new element into an array expensive because space must be created for the new element. If an element is inserted somewhere in the middle of an array, elements will have to be shifted in order to make room for the new element.
+We dynamically instantiate every node in a linked list, so our list never contains empty placeholders. More importantly, each node is independent in memory, so the operating system may use any available memory location to store it. Node memory independence allows linked lists to easily grow to immense sizes. However, because each node may exist anywhere in physical memory, it can be inefficient to access an element within the list. Elements must be accessed in order, starting from the first node (the head). Meanwhile, with an array, elements are indexed and can be accessed immediately by stating the index of the element within the array.
+
+
+
+> Come up with a real world example of a linked list.
+
+A: A simple real life example is a Train, here each coach is connected to its previous and next coach (Except first and last). In terms of programming consider coach body as node value and connectors as links to previous and next nodes.
+
+####Programming Questions
+
+>You may program the following questions in any language of your choice (JavaScript, pseudocode, etc.).
+
+Before beginning to code, write out a plan explaining how to solve the question.
+
+The Linked List push function should take a value, create a node, and add it to the end of a list. Below is a push function for a singly linked list. However, there is something wrong with it. Find the bug and fix the code.
+
+LinkedList.prototype.push = function(element) {
+ SET node = {
+   value: element,
+   next: null
+ }
+
+ IF the head node does not exist
+   THEN SET head to node
+ ELSE
+   SET current node to head
+   SET current.next to node
+ }
+}
+
+A: In the above code 
+" SET current node to head
+  SET current.next to node"; these two lines are wrong because head is not pointing to the right place and then we are loosing the pointer to the next so with this code we can not traverse through the linked list. So we can replace those two line with:
+"Current.next to head
+ Head to current node"
+
+
+> Given an unsorted singly linked list, remove all duplicates from the linked list.
+Example
+Input: a -> c -> d -> d -> a
+Output: a -> c -> d
+
+A: 
+function LinkedList () {
+    this.head = null;
+}
+LinkedList.prototype.print = function () {
+   var head = this.head;
+   var formatedList="";
+   
+   while(head){
+     formatedList += head.data + ",";
+     head = head.next
+   }
+   return formatedList;
+ };
+
+LinkedList.prototype.push = function (value) {
+    var node = {
+        data: value,
+        next:null
+    };
+
+    if (!this.head) {
+        this.head = node;
+    } else {
+        var ptr1 = this.head;
+        while (ptr1.next) {
+            ptr1 = ptr1.next;
+        }
+        ptr1.next = node;
+    }
+};
+
+LinkedList.prototype.removeDuplicates = function () {
+    if (!this.head || !this.head.next) {
+      console.log('No duplicates');
+      return;
+    }
+
+    var ptr1;
+    var ptr2;
+    var nodes = {};
+
+    ptr1 = this.head;
+    ptr2 = ptr1.next;
+    nodes[ptr1.data] = true;
+
+    while (ptr2) {
+        var data = ptr2.data;
+        if (nodes[data]) {
+            ptr1.next = ptr2.next;
+        } else {
+            nodes[data] = true; 
+            ptr1 = ptr2;	
+        }
+        ptr2 = ptr2.next;
+    }	
+};
+
+var list = new LinkedList();
+
+list.push('a');
+list.push('c');
+list.push('d');
+list.push('d');
+list.push('a');
+console.log(list.print());
+
+list.removeDuplicates();
+console.log(list.print());
+
+
+> Given an unsorted singly linked list, reverse it.
+Example
+Input: a -> b -> c -> d
+Output: d -> c -> b -> a
+
+A:
+function LinkedList () {
+     this.head = null;
+ }
+
+ LinkedList.prototype.print = function () {
+   var head = this.head;
+   var formatedList="";
+   
+   while(head){
+     formatedList += head.data + ",";
+     head = head.next
+   }
+   return formatedList;
+ };
+
+ LinkedList.prototype.push = function (val) {
+     var node = {
+         data: val,
+         next:null
+     };
+
+     if (!this.head) {
+         this.head = node;
+     } else {
+         var ptr1 = this.head;
+         while (ptr1.next) {
+             ptr1 = ptr1.next;
+         }
+         ptr1.next = node;
+     }
+ };
+
+ LinkedList.prototype.reverseLinkedList = function () {
+   var ptr1 = null;
+   var ptr2 = this.head;
+   var ptr3;
+
+   while (ptr2) {
+     ptr3 = ptr2.next;
+     ptr2.next = ptr1;
+     ptr1 = ptr2;
+     ptr2 = ptr3;
+   }
+   this.head = ptr1;
+ }
+
+ var list = new LinkedList();
+ list.push('a');
+ list.push('b');
+ list.push('c');
+ list.push('d');
+
+ console.log(list.print());
+
+ list.reverseLinkedList();
+ console.log(list.print());
+
+
