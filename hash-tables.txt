@@ -28,65 +28,78 @@ A:
 >  Build a system that allows a sales associate to enter a customer's name, address, and phone number into the system and look up customers using their phone numbers. Store this information in a hash table.
 
 A: Code:
-class Customer {
-   constructor(name, address, phoneNumber) {
-      this.name = name;
-      this.address = address;
-      this.phoneNumber = phoneNumber;
-   }
+class CustomerHashTable {
+  constructor() {
+    this.list = [];
+  }   
+  
+  
+  getByPhoneNumber(phonenumber) {
+    return this.list.filter(li => li[2] === phonenumber);
+  }
 
-	getHash() {
-		return parseInt(this.phoneNumber);
-	}
+  set(name, address, phonenumber) {
+    this.list.push([name, address, phonenumber])
+  }
 }
 
-let customerList = [];
-
-let surya = new Customer('Surya', 'MacArthur Blvd', '8482483111');
-
-let dinesh = new Customer('Dinesh', 'N Glen Dr', '8482483222');
-
-customerList[surya.getHash()] = surya;
-customerList[dinesh.getHash()] = dinesh;
+console.log("Enterting customer details into the system....");
+var table = new CustomerHashTable();
+for(var i=1; i<10; i++){
+  table.set("name "+i, "Address "+i, "phonenumber "+i);
+}
+console.log(table);
+console.log(table.getByPhoneNumber("phonenumber 1"));
 
 >  Build a system that allows a store owner to track their store's inventory using a hash table for storage.
 
-A: class Inventory {
-  constructor(item, count, serial) {
-    this.item = item;
-    this.count = count;
-    this.serial = serial;
-  }
-
-  getHash() {
-    return parseInt(this.serial);
-  }
+A: 
+class InventoryHashTable {
+  constructor() {
+    this.list = [];
+  }   
+  
+  set(item, count, serial) {
+    this.list.push([item, count, serial])
+  }
 }
 
-let inventoryList = [];
-
-let yamahaRx = new Inventory('Yamaha RX-100', '4', '38011345680');
-
-inventoryList[yamahaRx.getHash()] = yamahaRx;
-
-
+console.log("Inventory into the system....");
+var table = new InventoryHashTable();
+for(var i=1; i<10; i++){
+  table.set("item "+i, "count "+i, "serial"+i);
+}
+console.log(table);
 >  Build a system that allows digital copies of newspapers to be entered and searched by publisher and publication date. Use hash tables to store the necessary data.
 
-A: class Articles { 
-	constructor(copy, publisher, pubDate) {
-		this.copy = copy;
-		this.publisher = publisher;
-		this.pubDate = pubDate;
-	}
+A: 
+class NewspaperHashTable {
+  constructor() {
+    this.list = [];
+  }   
+  
+  
+  getByPublisher(name) {
+    let result = this.list.filter(li => li[1] === name);
+    return result;
+  }
+  
+  getByDate(date) {
+    let result = this.list.filter(li => li[2] === date);
+    return result;
+  }
 
-	getHash() {
-		return this.pubDate + ' ' + this.publisher;
-	}
+  set(name, publisher, date) {
+    this.list.push([name, publisher, date])
+  }
 }
 
-let compiledArticles = [];
-
-let newArticle = new Articles('Global Warming and Coral Reefs', 'National Geographic', '07-24-2018');
-
-compiledArticles[newArticle.getHash()] = newArticle;
+console.log("Enterting news papers into the system....");
+var table = new NewspaperHashTable();
+for(var i=1; i<10; i++){
+  table.set("name "+i, "publisher "+i, "2018-07-2"+i);
+}
+console.log(table);
+console.log(table.getByPublisher("publisher 1"));
+console.log(table.getByDate("2018-07-25"));
 
