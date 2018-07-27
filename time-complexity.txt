@@ -1,0 +1,73 @@
+#EXERCISES
+
+> What is time complexity and what is its relation to algorithms?
+
+A: Time complexity is a function that is used to estimate the amount of time it takes for a program to execute. Its relation to algorithms is that time complexity measures how long it takes an algorithm to execute and therefor how efficient it is.
+
+> What is runtime?
+
+A: Runtime refers to the physical time duration of an algorithm and is often used synonymously with time complexity.
+
+> How is the runtime of an algorithm calculated?
+
+A: The runtime of an algorithm is calculated by adding up the number of instructions in an algorithm as a function of its input. Then the expression is simplified to its largest term.
+
+> Name the six types of algorithm growth rates we saw in this checkpoint and list them in order of most efficient to least efficient. Now Google another algorithmic growth rate not covered and place it in the correct spot in your list.
+
+A:
+- Constant
+- Logarithmic
+- Linear
+- Log-linear
+- Quadratic 
+- CUBIC GROWTH RATE  
+- Exponential
+
+> Choose one of the algorithmic growth rates from the last question and make a comparison to a real-life situation.
+
+A: A real life situation for a linear growth rate is: a mail delivery person receives an amount of mail (e.g. 1000 letters) from the head post office and needs to deliver all mail (1000 letters). More mail would increase the runtime and less mail would decrease the runtime; however, with each piece making a nominal difference.
+
+> Determine the time complexity of the following snippet of code. It is commonly known as a linear search.
+
+FUNCTION linearSearch(array, target)
+ FOR each number in the array
+   IF number = target THEN
+     RETURN true
+   END IF
+ END FOR
+ RETURN false
+END FUNCTION
+
+A: Linear Growth Rate - Time Complexity of O(n).
+
+7. Determine the time complexity of the following snippet of code.
+
+FUNCTION foo(array)
+ FOR each number in the array
+   FOR each number in the array
+     print "Hello"
+   END FOR
+ END FOR
+END FUNCTION
+
+A: A: Quadratic Growth Rate - Time Complexity of O(n^2).
+
+8. Determine the time complexity of the following snippet of code. It is commonly known as the Fibonacci sequence.
+
+FUNCTION fibonacci(number)
+ IF number < 1 THEN
+   ERROR
+ ELSE IF number = 1 or 2 THEN
+   RETURN 1
+ ELSE
+   CALL fibonacci WITH number - 2 RETURNING twoBack
+   CALL fibonacci WITH number - 1 RETURNING oneBack
+   RETURN twoBack + oneBack
+ END IF
+END FUNCTION
+
+A: Exponential Growth Rate - Time Complexity of O(2^n).
+
+9.Out of the code snippets you just saw, which is the most time efficient?
+
+The most efficient is the snippet in number 6 because O(n) has a more efficient runtime than the other two.
