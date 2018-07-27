@@ -1,0 +1,75 @@
+#Exercises
+
+> Using proper pseudo-code, describe the following primitive algorithms:
+
+A:
+—> Making coffee
+
+FUNCTION makeCoffee
+SET desired number of cups
+
+FOR water in pot, INCREMENT water until desired number of cups achieved THEN
+    Pour water into machine until water in pot = 0 AND water in machine = desired number of cups
+ENDFOR
+FOR tablespoons of coffee grounds in machine, INCREMENT tablespoons until tablespoons equal desired number of cups THEN
+   Pour coffee grounds into machine filter
+   Put pot on machine hotplate
+ENDFOR
+READ brew setting on machine
+IF brew setting is Off THEN
+   Click the On button
+   Brew coffee until water in machine = 0
+END IF
+END FUNCTION
+   
+—> Washing dishes
+
+FUNCTION washDishes
+
+WHILE  dishes in sink
+REPEAT
+	Run hot water in sink
+	Add one pump of soap to sponge
+	Scrub dishes with sponge and hot water 
+UNTIL no dishes in sink
+ENDWHILE
+	PRINT ‘No dirty dishes’
+END FUNCTION
+
+
+—> Make brownies
+
+FUNCTION makeBrownies
+
+SET oven temperature total to zero
+REPEAT
+	READ temperature
+	IF temperature  NOT EQUAL 350 F
+		INCREMENT total
+	END IF
+UNTIL temperature EQUAL 350 F
+SEQUENCE	
+	Add brownie mix to bowl
+	Add egg to bowl 
+	Add oil to bowl
+	Add water to bowl
+REPEAT
+	Stir brownie, egg, oil, water with fork
+UNTIL completely blended mix
+SEQUENCE
+	Add blended mix to 8inch by 8inch pan UNTIL bowl is empty
+	Put pan in oven UNTIL 35 minutes pass
+	Remove pan from oven with oven mitts
+END FUNCTION 
+
+
+> As with the knot algorithm, there may be more than one way to solve the problem. It is essential to try to pick the best algorithm for a situation. Name three companies who created an algorithm that made them successful, e.g., Google's search algorithm. It doesn't need to be a tech example (such as a recipe or manufacturing a product). Google's algorithm produces more relevant results than other search engines; what about each of your cases make them stand out?
+
+A: 
+#Netflix has an algorithm that can recommend what each user may want to watch based on what they have viewed in the past. Netflix stands out because they have a rating system that shows how likely you’d prefer to watch any show/movie you click on.
+#Waze has an algorithm to predict the quickest route from point A to B and will even update the route without the user having to input anything. This stands out because of the app’s efficiency and ability to take into account all aspects of a commute to give the driver the best option.
+#LinkedIn has an algorithm to connect you and allow you to network with people in similar circles/fields. This stands out because of the convenience in which connecting with other people and finding potential employers/employment. 
+
+> Hypothesize about what constitutes an efficient algorithm versus an inefficient algorithm.
+
+A: An efficient algorithm achieves the desired outcome in as few and clearly stated steps as quickly as possible. An inefficient algorithm would obviously be the opposite. It may be hard to understand and have unnecessary steps that make the whole process take too long.
