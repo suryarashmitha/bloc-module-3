@@ -32,22 +32,78 @@ A:Directed, a-cyclic and unweighted graphs.
 
 A: Starting at root, check left and right branches to see if value exists, return true if so, false if not.
 
-function checkValuePresence(value){
-  let current = this.root;
-  while (current){
-    if (value === current.value){
-      return true;
-    }
-    else if (value < current.value){
-      current = current.left;
-    }
-    else {
-      current = current.right;
-    }
-   }
-   return false;
- }
-checkValuePresence();
+class Node {
+	constructor(data) {
+		this.data = data;
+		this.left = null;
+		this.right = null;
+	}
+}
+
+class BinarySearchTree {
+	constructor() {
+		this.root = null;
+	}
+
+	contains(data) {
+		var found = false;
+		var thisNode = this.root;
+		while (!found && thisNode) {
+			if (data < thisNode.data) {
+				thisNode = thisNode.left;
+			} else if (data > thisNode.data) {
+				thisNode = thisNode.right;
+			} else {
+				found = true;
+			}
+		}
+		return found;
+	}
+
+	insert(data) {
+		var newNode = new Node(data);
+		if (this.root === null) {
+			this.root = newNode;
+			this.length++;
+		} else {
+			this.insertNode(this.root, newNode);
+		}
+	}
+
+	insertNode(node, newNode) {
+		if (newNode.data < node.data) {
+			if (node.left === null) {
+				node.left = newNode;
+				this.length++;
+			} else {
+				this.insertNode(node.left, newNode);
+			}
+		} else {
+			if (node.right === null) {
+				node.right = newNode;
+				this.length++;
+			} else {
+				this.insertNode(node.right, newNode);
+			}
+		}
+	}
+}
+
+var BST = new BinarySearchTree();
+
+BST.insert(22);
+BST.insert(56);
+BST.insert(9);
+BST.insert(143);
+BST.insert(8);
+BST.insert(2);
+BST.insert(6);
+BST.insert(43);
+BST.insert(68);
+
+console.log(BST.contains(8)); 
+console.log(BST.contains(55)); 
+console.log(BST.contains(43)); 
 
 2. Given a Binary Search Tree and two nodes, n1 and n2, write a function that finds the distance between the two nodes.
 
@@ -56,36 +112,99 @@ checkValuePresence();
 
 A: Add distance between n1 and root and n2 and root and subtract 2*distance between root and lowest common ancestor.
 
-
-function findDistance(root, n1, n2){
-  var x = findPathLength(root, n1);
-  var y = findPathLength(root, n2);
-  var lowestAncestor = findLowestCommonAncestor(root, n1, n2);
-  var z = 2*findPathLength(root, lowestAncestor);
-
-  return x + y - z;
+class Node {
+	constructor(data) {
+		this.data = data;
+		this.left = null;
+		this.right = null;
+	}
 }
 
-function findPathLength(root, n){
-   if(root !== null){
-      var distance = 0;
-   if(root === null){
-      return distance;
-   } else if(root > n){
-     distance = 1 + findPathLength(root.left, n);
-   } distance = 1 + findPathLength(root.right, n);
- } return 0;
+class BinarySearchTree {
+	constructor() {
+		this.root = null;
+	}
+
+	findDistanceBetweenTwoNodes(root, n1, n2) {
+		var lowestCommonAncestor = this.findCommonAncestor(root, n1, n2);
+		var distanceNode1ToRoot = this.countAncestors(lowestCommonAncestor, n1);
+		var distanceNode2ToRoot = this.countAncestors(lowestCommonAncestor, n2);
+		var distanceRootToAncestor = this.countAncestors(root, lowestCommonAncestor);
+		var totalDistance = (distanceNode1ToRoot + distanceNode2ToRoot) - (2 * distanceRootToAncestor);
+		return ('The distance between node ' + n1 + ' and node ' + n2 + ' is ' + totalDistance);
+	}
+
+	findCommonAncestor(root, n1, n2) {
+		if (!root) return;
+		var lowestCommonAncestor = root.data;
+		if (n1 === lowestCommonAncestor || n2 === lowestCommonAncestor) {
+			return lowestCommonAncestor;
+		}
+		if (n1 < lowestCommonAncestor && n2 < lowestCommonAncestor) {
+			return this.findCommonAncestor(root.left, n1, n2);
+		}
+		if (n1 > lowestCommonAncestor && n2 > lowestCommonAncestor) {
+			return this.findCommonAncestor(root.right, n1, n2);
+		}
+		return lowestCommonAncestor;
+	}
+
+	countAncestors(root, data) {
+		let thisNode = this.root;
+		let nodeCount = 0;
+		while (thisNode) {
+			if (data === thisNode.data) {
+				return nodeCount;
+			}
+			thisNode = data < thisNode.data ? thisNode.left : thisNode.right;
+			nodeCount++;
+		}
+	}
+
+	getRootNode() {
+		return this.root;
+	}
+
+	insert(data) {
+		var newNode = new Node(data);
+		if (this.root === null) {
+			this.root = newNode;
+			this.length++;
+		} else {
+			this.insertNode(this.root, newNode);
+		}
+	}
+
+	insertNode(node, newNode) {
+		if (newNode.data < node.data) {
+			if (node.left === null) {
+				node.left = newNode;
+				this.length++;
+			} else {
+				this.insertNode(node.left, newNode);
+			}
+		} else {
+			if (node.right === null) {
+				node.right = newNode;
+				this.length++;
+			} else {
+				this.insertNode(node.right, newNode);
+			}
+		}
+	}
 }
 
-function findLowestCommonAncestor (root, n1, n2) {
-   if(root === 0){
-      return null;
-   }
-   if(root > n1 && root > n2){
-      return findLowestCommonAncestor(root.left, n1, n2);
-   }
-   else if(root < n1 && root < n2){
-      return findLowestCommonAncestor(root.right, n1, n2);
-   }
-   return root;
-}
+var BST = new BinarySearchTree();
+
+BST.insert(8);
+BST.insert(3);
+BST.insert(10);
+BST.insert(1);
+BST.insert(6);
+BST.insert(14);
+BST.insert(4);
+BST.insert(7);
+BST.insert(13);
+
+var root = BST.getRootNode();
+console.log(BST.findDistanceBetweenTwoNodes(root, 1, 14));
