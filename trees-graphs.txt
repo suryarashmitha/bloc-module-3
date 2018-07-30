@@ -91,19 +91,19 @@ class BinarySearchTree {
 
 var BST = new BinarySearchTree();
 
-BST.insert(22);
-BST.insert(56);
-BST.insert(9);
-BST.insert(143);
 BST.insert(8);
-BST.insert(2);
+BST.insert(3);
+BST.insert(10);
+BST.insert(1);
 BST.insert(6);
-BST.insert(43);
-BST.insert(68);
+BST.insert(14);
+BST.insert(4);
+BST.insert(7);
+BST.insert(13);
 
 console.log(BST.contains(8)); 
-console.log(BST.contains(55)); 
-console.log(BST.contains(43)); 
+console.log(BST.contains(23)); 
+console.log(BST.contains(14)); 
 
 2. Given a Binary Search Tree and two nodes, n1 and n2, write a function that finds the distance between the two nodes.
 
