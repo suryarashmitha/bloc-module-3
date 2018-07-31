@@ -1,0 +1,61 @@
+####Exercises
+
+> Write pseudocode for bubble sort.
+
+A: 
+FUNCTION bubbleSort(collection)
+   REPEAT
+     SET swapped to false
+     FOR i = first index of collection to last index of collection - 1
+       IF collection[i] > collection[i + 1] THEN
+         SET temporary to collection[i]
+         SET collection[i] to collection[i + 1]
+         SET collection[i + 1] to temporary
+         SET swapped to true
+       END IF
+     END FOR
+   UNTIL swapped is FALSE
+   RETURN collection
+ END FUNCTION
+
+> Write pseudocode for quicksort.
+
+A:
+FUNCTION quickSort(collection, left, right)
+  SET left to index 0
+  SET right to index of collection length -1
+  IF left < right
+	SET pivot to right
+	SET partitionIndex to partition WITH collection, pivot, left, right
+        CALL quickSort WITH collection, left, partitionIndex - 1
+        CALL quickSort WITH collection, partitionIndex + 1, right
+   ELSE
+        RETURN collection
+    END IF
+END FUNCTION
+
+FUNCTION partition(collection, pivot, left, right)
+    SET pivotValue to collection[pivot]
+    SET partitionIndex to left
+    FOR i = left to right of collection
+        IF collection[i] < pivotValue THEN
+        CALL swap WITH collection, i, partitionIndex
+        END IF
+    END FOR
+    CALL swap WITH collection, right, partitionIndex
+    RETURN partitionIndex
+END FUNCTION
+
+FUNCTION swap(collection, i, j)
+    SET temporary to collection[i]
+    SET collection[i] to collection[j]
+    SET collection[j] to temporary
+END FUNCTION
+
+> We talked about time complexity in a previous checkpoint, and how to get an idea of the efficiency of an algorithm. After looking at the pseudocode for the above sorting methods, identify why merge sort and quick sort are much more efficient than the others. Walking through each algorithm with a few sample collections may help.
+
+A: Quick sort is more efficient because it divides and conquers data, using less memory and thus being able to handle large amounts of data more quickly than other sorting methods. Merge sort is efficient because it basically does the divide and conquer thing as well, but unlike quick sort, it divides a collection until there are individual elements that can no longer be divided. At the end of dividing the collection, the elements are merged back in a desired order. It seems the divide and conquer method is more efficient than the iterate, compare, and swap methods.
+
+> All of the sorts addressed in this checkpoint are known as comparison sorts. Research bucket sort and explain how it works. What is the ideal input for bucket sort?
+
+A: Bucket sort takes elements in a collection or array and sorts the elements into the desired number of “buckets.” Each bucket has criteria for each element to be organized into. Then the buckets are sorted in the desired order, allowing the elements to be put in order, or sorted, as well. The ideal input would be an unsorted array.
