@@ -48,138 +48,88 @@ Example
 Input: a -> c -> d -> d -> a
 Output: a -> c -> d
 
-A: 
-function LinkedList () {
-    this.head = null;
-}
-LinkedList.prototype.print = function () {
-   var head = this.head;
-   var formatedList="";
-   
-   while(head){
-     formatedList += head.data + ",";
-     head = head.next
-   }
-   return formatedList;
- };
-
-LinkedList.prototype.push = function (value) {
-    var node = {
-        data: value,
-        next:null
-    };
-
-    if (!this.head) {
-        this.head = node;
-    } else {
-        var ptr1 = this.head;
-        while (ptr1.next) {
-            ptr1 = ptr1.next;
-        }
-        ptr1.next = node;
-    }
-};
-
-LinkedList.prototype.removeDuplicates = function () {
-    if (!this.head || !this.head.next) {
-      console.log('No duplicates');
-      return;
-    }
-
-    var ptr1;
-    var ptr2;
-    var nodes = {};
-
-    ptr1 = this.head;
-    ptr2 = ptr1.next;
-    nodes[ptr1.data] = true;
-
-    while (ptr2) {
-        var data = ptr2.data;
-        if (nodes[data]) {
-            ptr1.next = ptr2.next;
-        } else {
-            nodes[data] = true; 
-            ptr1 = ptr2;	
-        }
-        ptr2 = ptr2.next;
-    }	
-};
-
-var list = new LinkedList();
-
-list.push('a');
-list.push('c');
-list.push('d');
-list.push('d');
-list.push('a');
-console.log(list.print());
-
-list.removeDuplicates();
-console.log(list.print());
-
-
 > Given an unsorted singly linked list, reverse it.
 Example
 Input: a -> b -> c -> d
 Output: d -> c -> b -> a
 
 A:
-function LinkedList () {
-     this.head = null;
- }
+function LinkedList() {
+  this.head = null;
+}
 
- LinkedList.prototype.print = function () {
-   var head = this.head;
-   var formatedList="";
-   
-   while(head){
-     formatedList += head.data + ",";
-     head = head.next
-   }
-   return formatedList;
- };
+LinkedList.prototype = {
+  makeNode: function(value) {
+    return {
+      data: value,
+      next: null
+    }
+  },
+  addNode: function(value) {
+    let currentNode = this.head;
+    let newNode = this.makeNode(value);
+    if (this.head == null) {
+      this.head = newNode;
+    } else {
+      while (currentNode.next != null) {
+        currentNode = currentNode.next;
+      }
+      currentNode.next = newNode;
+    }
+  },
+  removeDuplicates: function() {
+    let previous = this.head;
+    let store = [];
+    let lastUnique = null;
+    if (previous) {
+      store.push(previous.data);
+      let current = this.head.next;
+      while (current != null) {
+        if (store.indexOf(current.data) == -1) {
+            store.push(current.data);
+            lastUnique = current;
+        } else {
+          previous.next = current.next; 
+        }
+        previous = current;
+        current = current.next;
+      }
+      lastUnique.next = null; 
+    } else {
+      console.log("Not in the list")
+    }
+  },
+  reverseList: function() {
+    let current = this.head;
+    let previous = null;
+    let nextNode = null;
 
- LinkedList.prototype.push = function (val) {
-     var node = {
-         data: val,
-         next:null
-     };
+    while (current != null) {
+      let tempNext = current.next;
+      current.next = previous;
+      previous = current;
+      current = tempNext;
+    }
+    this.head = previous;
+  }
+}
 
-     if (!this.head) {
-         this.head = node;
-     } else {
-         var ptr1 = this.head;
-         while (ptr1.next) {
-             ptr1 = ptr1.next;
-         }
-         ptr1.next = node;
-     }
- };
+let myList = new LinkedList();
+myList.addNode(37);
+myList.addNode(39);
+myList.addNode(42);
+myList.addNode(39);
+myList.addNode(65);
+myList.addNode(37);
+myList.addNode(42);
+myList.addNode(39);
+myList.addNode(42);
+//console.log(JSON.stringify(myList));
 
- LinkedList.prototype.reverseLinkedList = function () {
-   var ptr1 = null;
-   var ptr2 = this.head;
-   var ptr3;
+myList.removeDuplicates();
+console.log(JSON.stringify(myList));
 
-   while (ptr2) {
-     ptr3 = ptr2.next;
-     ptr2.next = ptr1;
-     ptr1 = ptr2;
-     ptr2 = ptr3;
-   }
-   this.head = ptr1;
- }
-
- var list = new LinkedList();
- list.push('a');
- list.push('b');
- list.push('c');
- list.push('d');
-
- console.log(list.print());
-
- list.reverseLinkedList();
- console.log(list.print());
+myList.reverseList();
+console.log(JSON.stringify(myList));
 
 
