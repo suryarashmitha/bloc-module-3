@@ -71,10 +71,11 @@ LinkedList.prototype = {
     if (this.head == null) {
       this.head = newNode;
     } else {
-      while (currentNode.next != null) {
-        currentNode = currentNode.next;
-      }
-      currentNode.next = newNode;
+        currentNode = this.head;
+        while (currentNode.next) {
+            currentNode = currentNode.next;
+        }
+        currentNode.next = newNode;
     }
   },
   removeDuplicates: function() {
@@ -115,15 +116,14 @@ LinkedList.prototype = {
 }
 
 let myList = new LinkedList();
-myList.addNode(37);
-myList.addNode(39);
-myList.addNode(42);
-myList.addNode(39);
-myList.addNode(65);
-myList.addNode(37);
-myList.addNode(42);
-myList.addNode(39);
-myList.addNode(42);
+myList.addNode('a');
+myList.addNode('a');
+myList.addNode('b');
+myList.addNode('b');
+myList.addNode('c');
+myList.addNode('c');
+myList.addNode('d');
+myList.addNode('d');
 //console.log(JSON.stringify(myList));
 
 myList.removeDuplicates();
